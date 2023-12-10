@@ -65,12 +65,11 @@ def functionality(request):
         return Response({"invalid request"})
 @api_view(['POST'])
 def user_create(request):
-    print(1)
-    print(request.POST)
+    
     if request.method=="POST":
         data=request.POST
         if not ("username" in data and "password" in data):
-            return Response(request)
+            return Response({"invalid request,argument(s)  missing"})
         if User.objects.filter(username=data["username"]).exists():
             return Response({"username already taken"})
         else:
